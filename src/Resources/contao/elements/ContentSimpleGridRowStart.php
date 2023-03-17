@@ -91,7 +91,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if ($arrConfigData['config']['row-class'])
         {
-            array_insert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
+            \Contao\ArrayUtil::arrayInsert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
         }
 
         $strClasses = implode(' ', $arrConfiguredClasses);

@@ -195,7 +195,7 @@ class DmaSimpleGrid
         if (sizeof($arrConfiguredClasses) > 0 || (isset($arrTemplateData['type']) && $arrTemplateData['type']=="dma_simplegrid_column_start")) {
             if (isset(static::$arrCache['grid']['config']['column-class']) && static::$arrCache['grid']['config']['column-class'])
             {
-                array_insert($arrConfiguredClasses, 0, static::$arrCache['grid']['config']['column-class']);
+                \Contao\ArrayUtil::arrayInsert($arrConfiguredClasses, 0, static::$arrCache['grid']['config']['column-class']);
             }
         }
 
