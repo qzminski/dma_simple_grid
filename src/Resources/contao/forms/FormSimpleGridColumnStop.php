@@ -11,7 +11,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class FormSimpleGridColumnStop extends \Widget
+class FormSimpleGridColumnStop extends \Contao\Widget
 {
 
     /**
@@ -40,10 +40,12 @@ class FormSimpleGridColumnStop extends \Widget
      */
     public function parse($arrAttributes=null)
     {
-        if (version_compare(VERSION, '4.0', '>=') && TL_MODE === 'BE') {
-            /** @var \Contao\BackendTemplate|object $objTemplate */
-            $objTemplate = new \Contao\BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_stop'][0]) . ' ###';
+        $request = \Contao\System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && \Contao\System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request)) {
+            /** @var \Contao\Contao\BackendTemplate|object $objTemplate */
+            $objTemplate = new \Contao\Contao\BackendTemplate('be_wildcard');
+            $objTemplate->wildcard = '### ' . utf8_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_stop'][0]) . ' ###';
 
             return $objTemplate->parse();
         }

@@ -11,7 +11,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridWrapperStart extends \ContentElement
+class ContentSimpleGridWrapperStart extends \Contao\ContentElement
 {
     /**
      * @var string Template
@@ -27,10 +27,12 @@ class ContentSimpleGridWrapperStart extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE == 'BE')
+        $request = \Contao\System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && \Contao\System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \BackendTemplate($this->strTemplate);
+            $objTemplate = new \Contao\BackendTemplate($this->strTemplate);
             //$objTemplate->wildcard = "SimpleGrid: Row Start";
 
             return $objTemplate->parse();
@@ -61,7 +63,7 @@ class ContentSimpleGridWrapperStart extends \ContentElement
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false) && $arrConfigData['config']['additional-classes']['wrapper'] && $this->dma_simplegrid_additionalwrapperclasses)
         {
-            $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalwrapperclasses, true);
+            $arrAdditionalClasses = \Contao\StringUtil::deserialize($this->dma_simplegrid_additionalwrapperclasses, true);
 
             if (sizeof($arrAdditionalClasses) > 0)
             {

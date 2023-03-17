@@ -11,7 +11,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridRowStart extends \ContentElement
+class ContentSimpleGridRowStart extends \Contao\ContentElement
 {
     /**
      * @var string Template
@@ -27,10 +27,12 @@ class ContentSimpleGridRowStart extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE == 'BE')
+        $request = \Contao\System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && \Contao\System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \BackendTemplate($this->strTemplate);
+            $objTemplate = new \Contao\BackendTemplate($this->strTemplate);
             //$objTemplate->wildcard = "SimpleGrid: Row Start";
 
             return $objTemplate->parse();
@@ -61,7 +63,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && $this->dma_simplegrid_blocksettings)
         {
-            $arrBlockSettings = deserialize($this->dma_simplegrid_blocksettings, true);
+            $arrBlockSettings = \Contao\StringUtil::deserialize($this->dma_simplegrid_blocksettings, true);
             if (sizeof($arrBlockSettings) == 1)
             {
                 $arrElementSettings = $arrBlockSettings[0];
@@ -78,7 +80,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
-            $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
+            $arrAdditionalClasses = \Contao\StringUtil::deserialize($this->dma_simplegrid_additionalrowclasses, true);
 
             if (sizeof($arrAdditionalClasses) > 0)
             {

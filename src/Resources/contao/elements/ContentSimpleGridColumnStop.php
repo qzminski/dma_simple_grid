@@ -11,7 +11,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridColumnStop extends \ContentElement
+class ContentSimpleGridColumnStop extends \Contao\ContentElement
 {
     /**
      * @var string Template
@@ -26,12 +26,14 @@ class ContentSimpleGridColumnStop extends \ContentElement
      */
     public function compile()
     {
-        if (TL_MODE == 'BE')
+        $request = \Contao\System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && \Contao\System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
         {
             $this->strTemplate = 'be_wildcard';
 
-            /** @var \BackendTemplate|object $objTemplate */
-            $objTemplate = new \BackendTemplate($this->strTemplate);
+            /** @var \Contao\BackendTemplate|object $objTemplate */
+            $objTemplate = new \Contao\BackendTemplate($this->strTemplate);
 
             $this->Template = $objTemplate;
             //$this->Template->wildcard = "SimpleGrid: Column Stop";

@@ -21,7 +21,7 @@ class DmaSimpleGrid
 
     /**
      * Object instance (Singleton)
-     * @var \Input
+     * @var \Contao\Input
      */
     protected static $objInstance;
 
@@ -97,19 +97,19 @@ class DmaSimpleGrid
         $arrConfiguredClasses = array();
 
         if (isset($arrTemplateData['dma_simplegrid_columnsettings']) && !is_array($arrTemplateData['dma_simplegrid_columnsettings'])) {
-            $arrColumnSettings = deserialize($arrTemplateData['dma_simplegrid_columnsettings'], true);
+            $arrColumnSettings = \Contao\StringUtil::deserialize($arrTemplateData['dma_simplegrid_columnsettings'], true);
         }
         if (isset($arrTemplateData['dma_simplegrid_offsetsettings']) && !is_array($arrTemplateData['dma_simplegrid_offsetsettings'])) {
-            $arrOffsetSettings = deserialize($arrTemplateData['dma_simplegrid_offsetsettings'], true);
+            $arrOffsetSettings = \Contao\StringUtil::deserialize($arrTemplateData['dma_simplegrid_offsetsettings'], true);
         }
         if (isset($arrTemplateData['dma_simplegrid_offsetrightsettings']) && !is_array($arrTemplateData['dma_simplegrid_offsetrightsettings'])) {
-            $arrOffsetRightSettings = deserialize($arrTemplateData['dma_simplegrid_offsetrightsettings'], true);
+            $arrOffsetRightSettings = \Contao\StringUtil::deserialize($arrTemplateData['dma_simplegrid_offsetrightsettings'], true);
         }
         if (isset($arrTemplateData['dma_simplegrid_pushsettings']) && !is_array($arrTemplateData['dma_simplegrid_pushsettings'])) {
-            $arrPushSettings = deserialize($arrTemplateData['dma_simplegrid_pushsettings'], true);
+            $arrPushSettings = \Contao\StringUtil::deserialize($arrTemplateData['dma_simplegrid_pushsettings'], true);
         }
         if (isset($arrTemplateData['dma_simplegrid_pullsettings']) && !is_array($arrTemplateData['dma_simplegrid_pullsettings'])) {
-            $arrPullSettings = deserialize($arrTemplateData['dma_simplegrid_pullsettings'], true);
+            $arrPullSettings = \Contao\StringUtil::deserialize($arrTemplateData['dma_simplegrid_pullsettings'], true);
         }
 
         if (isset($arrColumnSettings) && sizeof($arrColumnSettings) == 1) {
@@ -181,7 +181,7 @@ class DmaSimpleGrid
 
         if (isset(static::$arrCache['grid']['config']['additional-classes']['columns']) && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false)
         ) {
-            $arrAdditionalClasses = isset($arrTemplateData['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true) : [];
+            $arrAdditionalClasses = isset($arrTemplateData['dma_simplegrid_additionalcolumnclasses']) ? \Contao\StringUtil::deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true) : [];
 
             if (sizeof($arrAdditionalClasses) > 0)
             {
@@ -263,7 +263,7 @@ class DmaSimpleGrid
 
     }
 
-    public static function columnsSelectCallback(\Widget $widget = null)
+    public static function columnsSelectCallback(\Contao\Widget $widget = null)
     {
         if (!isset(static::$arrCache['grid']))
         {
@@ -347,28 +347,28 @@ class DmaSimpleGrid
         $arrConfiguredClasses = array();
 
         if (!is_array($arrRow['dma_simplegrid_columnsettings'] ?? null)) {
-            $arrColumnSettings = isset($arrRow['dma_simplegrid_columnsettings']) ? deserialize($arrRow['dma_simplegrid_columnsettings'], true) : [];
+            $arrColumnSettings = isset($arrRow['dma_simplegrid_columnsettings']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_columnsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_offsetsettings'] ?? null)) {
-            $arrOffsetSettings = isset($arrRow['dma_simplegrid_offsetsettings']) ? deserialize($arrRow['dma_simplegrid_offsetsettings'], true) : [];
+            $arrOffsetSettings = isset($arrRow['dma_simplegrid_offsetsettings']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_offsetsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_offsetrightsettings'] ?? null)) {
-            $arrOffsetRightSettings = isset($arrRow['dma_simplegrid_offsetrightsettings']) ? deserialize($arrRow['dma_simplegrid_offsetrightsettings'], true) : [];
+            $arrOffsetRightSettings = isset($arrRow['dma_simplegrid_offsetrightsettings']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_offsetrightsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_pushsettings'] ?? null)) {
-            $arrPushSettings = isset($arrRow['dma_simplegrid_pushsettings']) ? deserialize($arrRow['dma_simplegrid_pushsettings'], true) : [];
+            $arrPushSettings = isset($arrRow['dma_simplegrid_pushsettings']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_pushsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_pullsettings'] ?? null)) {
-            $arrPullSettings = isset($arrRow['dma_simplegrid_pullsettings']) ? deserialize($arrRow['dma_simplegrid_pullsettings'], true) : [];
+            $arrPullSettings = isset($arrRow['dma_simplegrid_pullsettings']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_pullsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_additionalcolumnclasses'] ?? null)) {
-            $arrAdditionalColumnClassesSettings = isset($arrRow['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrRow['dma_simplegrid_additionalcolumnclasses'], true) : [];
+            $arrAdditionalColumnClassesSettings = isset($arrRow['dma_simplegrid_additionalcolumnclasses']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_additionalcolumnclasses'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_additionalrowclasses'] ?? null)) {
-            $arrAdditionalRowClassesSettings = isset($arrRow['dma_simplegrid_additionalrowclasses']) ? deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true) : [];
+            $arrAdditionalRowClassesSettings = isset($arrRow['dma_simplegrid_additionalrowclasses']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_additionalwrapperclasses'] ?? null)) {
-            $arrAdditionalWrapperClassesSettings = isset($arrRow['dma_simplegrid_additionalwrapperclasses']) ? deserialize($arrRow['dma_simplegrid_additionalwrapperclasses'], true) : [];
+            $arrAdditionalWrapperClassesSettings = isset($arrRow['dma_simplegrid_additionalwrapperclasses']) ? \Contao\StringUtil::deserialize($arrRow['dma_simplegrid_additionalwrapperclasses'], true) : [];
         }
 
         if (sizeof($arrColumnSettings) == 1) {

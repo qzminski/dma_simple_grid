@@ -11,7 +11,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridColumnStart extends \ContentElement
+class ContentSimpleGridColumnStart extends \Contao\ContentElement
 {
     /**
      * @var string Template
@@ -21,10 +21,12 @@ class ContentSimpleGridColumnStart extends \ContentElement
 
     public function generate()
     {
-        if (TL_MODE == 'BE')
+        $request = \Contao\System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        if ($request && \Contao\System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest($request))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \BackendTemplate($this->strTemplate);
+            $objTemplate = new \Contao\BackendTemplate($this->strTemplate);
             //$objTemplate->wildcard = "SimpleGrid: Column Start";
 
             return $objTemplate->parse();
